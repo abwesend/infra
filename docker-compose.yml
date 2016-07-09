@@ -3,3 +3,16 @@ services:
   nginx:
     build:
       context: ./nginx
+    restart: always
+  certs:
+    build:
+      context: ./certs
+    container_name: letsencrypt
+    expose:
+      - 80
+    volumes:
+      - /certs:/certs
+    restart: always
+    environment:
+      - DOMAINS=abwesend.com www.abwesend.com
+      - EMAIL=ich@abwesend.com
