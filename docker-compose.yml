@@ -12,7 +12,7 @@ services:
   certs:
     build:
       context: ./certs
-    container_name: letsencrypt
+    container_name: certbot
     volumes_from:
       - nginx
     restart: always
