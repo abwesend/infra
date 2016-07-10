@@ -6,6 +6,7 @@ RUN mkdir -p /tmp/nginx/client-body
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY conf.d/ /etc/nginx/conf.d/
+COPY dhparams.pem /etc/nginx/dhparams.pem
 
 EXPOSE 80 443
 
