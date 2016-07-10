@@ -6,13 +6,13 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    volumes:
+      - /certs:/certs
     restart: always
   certs:
     build:
       context: ./certs
     container_name: letsencrypt
-    expose:
-      - 80
     volumes:
       - /certs:/certs
     restart: always
