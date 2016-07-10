@@ -1,7 +1,7 @@
 for d in $DOMAINS
 do
  echo "Running certbot for $d"
- certbot certonly --webroot -w /certs/challenges --agree-tos -n --email $EMAIL -d $d
+ certbot-auto certonly --webroot -w /certs/challenges --agree-tos -n --email $EMAIL -d $d
  ec=$?
  echo "certbot exit code $ec"
  if [ $ec -eq 0 ]

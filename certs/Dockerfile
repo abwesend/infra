@@ -1,16 +1,17 @@
-FROM quay.io/letsencrypt/letsencrypt
-MAINTAINER Henri Dwyer <henri@dwyer.io>
+FROM alpine:latest
+MAINTAINER Benjamin Fritsch <beanie@benle.de>
 
-RUN mkdir /certs
+RUN apk add --update wget ca-certificates cron && rm -rf /var/cache/apk/*
+RUN wget https://dl.eff.org/certbot-auto /usr/local/bin/certbot-auto
+RUN chmod a+x /usr/local/bin/certbot-auto
+
+RUN mkdir -p /certs/challenges
 
 # Add crontab file in the cron directory
-ADD crontab /etc/cron.d/crontab
+ADD crontab crontab.tmp
 
-# Give execution rights on the cron job
-RUN chmod 0644 /etc/cron.d/crontab
+RUN crontab crontab.tmp && rm -rf crontab.tmp
 
-COPY ./scripts/ /
+ADD run_certbot.sh
 
-ENTRYPOINT ["/bin/sh", "-c"]
-
-CMD ["/run_cron.sh"]
+CMD [/usr/sbin/crond, -f, -d, 0]
