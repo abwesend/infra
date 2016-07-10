@@ -13,8 +13,8 @@ services:
     build:
       context: ./certs
     container_name: letsencrypt
-    volumes:
-      - /certs:/certs
+    volumes_from:
+      - nginx
     restart: always
     environment:
       - DOMAINS=abwesend.com www.abwesend.com
