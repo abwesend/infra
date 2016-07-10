@@ -1,8 +1,8 @@
 FROM alpine:latest
 MAINTAINER Benjamin Fritsch <beanie@benle.de>
 
-RUN apk add --update wget ca-certificates cron && rm -rf /var/cache/apk/*
-RUN wget https://dl.eff.org/certbot-auto /usr/local/bin/certbot-auto
+RUN apk add --update wget ca-certificates && rm -rf /var/cache/apk/*
+RUN wget -O /usr/local/bin/certbot-auto https://dl.eff.org/certbot-auto
 RUN chmod a+x /usr/local/bin/certbot-auto
 
 RUN mkdir -p /certs/challenges
